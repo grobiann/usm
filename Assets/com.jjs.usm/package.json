@@ -1,0 +1,8 @@
+{
+  "name": "com.jjs.usm",
+  "version": "0.0.2",
+  "displayName": "Ui State Machine",
+  "description": "Ui State Machine",
+  "unity": "2022.3",
+  "dependencies": {}
+}

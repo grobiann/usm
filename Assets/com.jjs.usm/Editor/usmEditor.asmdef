@@ -1,0 +1,16 @@
+{
+    "name": "usmEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fb2e8ca8bed354a4b931e1ae5e6af746"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
