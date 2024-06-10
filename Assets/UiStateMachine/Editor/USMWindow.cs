@@ -99,7 +99,7 @@ namespace USM
             EndGUI();
         }
 
-        #region GUI Control
+        #region GUI Display
         private void StartGUI()
         {
             GUILayout.BeginHorizontal();
@@ -182,7 +182,14 @@ namespace USM
                 string curName = GUILayout.TextField(item.gameObject.name, GUILayout.Width(width - 50));
                 if (prevGameObjectName != curName)
                 {
-                    ChangeGameObjectName(item.gameObject, curName);
+                    if (IsUsmChangableInCurrentMode() == false)
+                    {
+                        OpenInPrefabMode();
+                    }
+                    else
+                    {
+                        ChangeGameObjectName(item.gameObject, curName);
+                    }
                 }
 
                 bool contain = _currentUsmBehaviour.usm.activeTargets.Contains(item.gameObject);
@@ -191,7 +198,15 @@ namespace USM
                 GUI.backgroundColor = bgColor;
                 if (GUILayout.Button(btnText, GUILayout.Width(60)))
                 {
-                    ChangeGameObjectUsability(_currentUsmBehaviour.usm, item.gameObject, !contain);
+                    if (IsUsmChangableInCurrentMode() == false)
+                    {
+                        OpenInPrefabMode();
+                        return;
+                    }
+                    else
+                    {
+                        ChangeGameObjectUsability(_currentUsmBehaviour.usm, item.gameObject, !contain);
+                    }
                 }
                 GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
@@ -219,7 +234,14 @@ namespace USM
             string stateName = GUILayout.TextField(state.StateName, GUILayout.Width(width));
             if (prevStateName != stateName)
             {
-                ChangeStateName(state, stateName);
+                if (IsUsmChangableInCurrentMode() == false)
+                {
+                    OpenInPrefabMode();
+                }
+                else
+                {
+                    ChangeStateName(state, stateName);
+                }
             }
             GUILayout.Space(5);
 
@@ -236,7 +258,14 @@ namespace USM
                     GUI.backgroundColor = bgColor;
                     if (GUILayout.Button(btnText, GUILayout.Width(width), GUILayout.Height(STATE_OBJECT_ITEM_HEIGHT)))
                     {
-                        ChangeGameObjectActivation(state, go, active);
+                        if (IsUsmChangableInCurrentMode() == false)
+                        {
+                            OpenInPrefabMode();
+                        }
+                        else
+                        {
+                            ChangeGameObjectActivation(state, go, active);
+                        }
                     }
                     GUI.backgroundColor = Color.white;
                 }
@@ -245,7 +274,15 @@ namespace USM
             GUI.backgroundColor = new Color(1.0f, 0.5f, 0.5f);
             if (GUILayout.Button("Delete", GUILayout.Width(width), GUILayout.Height(STATE_OBJECT_ITEM_HEIGHT)))
             {
-                DeleteState(state);
+                if (IsUsmChangableInCurrentMode() == false)
+                {
+                    OpenInPrefabMode();
+                }
+                else
+                {
+                    DeleteState(state);
+                }
+
             }
             GUI.backgroundColor = Color.white;
 
@@ -269,10 +306,75 @@ namespace USM
             GUI.backgroundColor = Color.yellow;
             if (GUILayout.Button("Create", GUILayout.Height(STATE_OBJECT_ITEM_HEIGHT * 2.5f)))
             {
-                CreateNewState(_newStateName);
+                if (IsUsmChangableInCurrentMode() == false)
+                {
+                    OpenInPrefabMode();
+                }
+                else
+                {
+                    CreateNewState(_newStateName);
+                }
             }
             GUI.backgroundColor = Color.white;
             GUILayout.EndVertical();
+        }
+        #endregion
+
+        #region GUI Input Controller
+        private void ChangeGameObjectUsability(UiStateMachine usm, GameObject go, bool usable)
+        {
+            if (usable)
+                usm.AddTarget(go);
+            else
+                usm.RemoveTarget(go);
+
+            RefreshUsmFilteredChildren();
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+        }
+
+        private void ChangeGameObjectActivation(UiState state, GameObject go, bool active)
+        {
+            state.SetActive(go, !active);
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+        }
+
+        private void ChangeStateName(UiState state, string name)
+        {
+            state.StateName = name;
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+        }
+
+        private void ChangeGameObjectName(GameObject go, string name)
+        {
+            go.name = name;
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+        }
+
+        private bool CreateNewState(string name)
+        {
+            if (_currentUsmBehaviour.usm.states.Exists(x => x.StateName == name))
+                return false;
+
+            var newState = new UiState();
+            newState.StateName = name;
+
+            _currentUsmBehaviour.usm.AddState(newState);
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+
+            int stateCount = _currentUsmBehaviour.usm.states.Count;
+            _newStateName = GetNewStateName(stateCount);
+            return true;
+        }
+
+        private void DeleteState(UiState state)
+        {
+            Undo.RecordObject(_currentUsmBehaviour, "Delete State");
+            _currentUsmBehaviour.usm.RemoveState(state);
+
+            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
+
+            int stateCount = _currentUsmBehaviour.usm.states.Count;
+            _newStateName = GetNewStateName(stateCount);
         }
         #endregion
 
@@ -283,17 +385,22 @@ namespace USM
             {
                 var root = prefabStage.prefabContentsRoot;
                 var usm = root.GetComponent<UiStateMachineBehaviour>();
-                if (usm != null)
-                    _usmBehavioursInScene = new UiStateMachineBehaviour[1] { usm };
-                else
+                if (usm == null)
+                {
                     _usmBehavioursInScene = new UiStateMachineBehaviour[0];
+                }
+                else
+                {
+                    // Find all instances of UiStateMachine in prefab stage
+                    _usmBehavioursInScene = usm.gameObject.GetComponentsInChildren<UiStateMachineBehaviour>(true);
+                }
             }
             else
             {
                 // Find all instances of UiStateMachine in the current scene
                 _usmBehavioursInScene = FindObjectsOfType<UiStateMachineBehaviour>(true).Reverse().ToArray();
             }
-
+            
             _currentUsmBehaviour = null;
             _currentUsmChildrenFiltered = null;
             if (_usmBehavioursInScene.Length > 0)
@@ -318,7 +425,7 @@ namespace USM
             RefreshUsmChildren();
 
             int stateCount = _currentUsmBehaviour.usm.states.Count;
-            _newStateName = CreateNewStateName(stateCount);
+            _newStateName = GetNewStateName(stateCount);
         }
 
         private void RefreshUsmChildren()
@@ -372,101 +479,10 @@ namespace USM
             return true;
         }
 
-        private void ChangeGameObjectUsability(UiStateMachine usm, GameObject go, bool usable)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            if (usable)
-                usm.AddTarget(go);
-            else
-                usm.RemoveTarget(go);
-
-            RefreshUsmFilteredChildren();
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-        }
-
-        private void ChangeGameObjectActivation(UiState state, GameObject go, bool active)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            state.SetActive(go, !active);
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-        }
-
-        private void ChangeStateName(UiState state, string name)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            state.StateName = name;
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-        }
-
-        private void ChangeGameObjectName(GameObject go, string name)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            go.name = name;
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-        }
-
-        private void CreateNewState(string name)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            if (_currentUsmBehaviour.usm.states.Exists(x => x.StateName == name))
-                return;
-
-            var newState = new UiState();
-            newState.StateName = name;
-
-            _currentUsmBehaviour.usm.AddState(newState);
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-
-            int stateCount = _currentUsmBehaviour.usm.states.Count;
-            _newStateName = CreateNewStateName(stateCount);
-        }
-
-        private void DeleteState(UiState state)
-        {
-            if (IsUsmChangableInCurrentMode() == false)
-            {
-                OpenInPrefabMode();
-                return;
-            }
-
-            Undo.RecordObject(_currentUsmBehaviour, "Delete State");
-            _currentUsmBehaviour.usm.RemoveState(state);
-
-            EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
-
-            int stateCount = _currentUsmBehaviour.usm.states.Count;
-            _newStateName = CreateNewStateName(stateCount);
-        }
-
         private void EnsureUsmDataValidity()
         {
             // scene내에 usm이 변경되었는지 여부 확인
-            bool usmInSceneChanged = 
+            bool usmInSceneChanged =
                 _usmBehavioursInScene.ToList().Exists(x => x == null) ||
                 _selectedUsmBehaviourIndex >= _usmBehavioursInScene.Length ||
                 _currentUsmBehaviour == null;
@@ -515,7 +531,7 @@ namespace USM
             var assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
             if (!string.IsNullOrEmpty(assetPath))
             {
-                PrefabStageUtility.OpenPrefab(assetPath);
+                PrefabStageUtility.OpenPrefab(assetPath, go, PrefabStage.Mode.InIsolation);
             }
             else
             {
@@ -523,7 +539,7 @@ namespace USM
             }
         }
 
-        private string CreateNewStateName(int count)
+        private string GetNewStateName(int count)
         {
             if (count == 0)
                 return "state";
