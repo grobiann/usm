@@ -8,10 +8,8 @@ namespace USM.Sample
     {
         public UiStateMachineBehaviour usm_tab;
         public UiStateMachineBehaviour usm_graphic;
-        public UiStateMachineBehaviour usm_account;
 
         private int _indexGraphics = 0;
-        private int _indexAccount = 0;
 
         private void Awake()
         {
@@ -26,10 +24,6 @@ namespace USM.Sample
             if (tabName == "Graphics")
             {
                 StartCoroutine(ChangeGraphics_Periodically());
-            }
-            else if (tabName == "Account")
-            {
-                StartCoroutine(ChangeAccount_Periodically());
             }
         }
 
@@ -47,22 +41,6 @@ namespace USM.Sample
                 _indexGraphics += 1;
                 if (_indexGraphics >= graphicStates.Count)
                     _indexGraphics = 0;
-            }
-        }
-
-        IEnumerator ChangeAccount_Periodically()
-        {
-            string[] states = new string[] { "guest", "google", "apple" };
-
-            while (true)
-            {
-                var state = states[_indexAccount];
-                usm_account.Play(state);
-                yield return new WaitForSeconds(2.0f);
-
-                _indexAccount += 1;
-                if (_indexAccount >= states.Length)
-                    _indexAccount = 0;
             }
         }
     }

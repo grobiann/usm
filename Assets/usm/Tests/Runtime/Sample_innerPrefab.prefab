@@ -278,7 +278,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8640189985129839412}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6995010357363538242}
+        m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: guest
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2560452472936439326
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +648,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5778854773715883245}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6995010357363538242}
+        m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: apple
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4472191805979921538
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +860,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5749414019919910812}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6995010357363538242}
+        m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: google
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7032564924545266206
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +993,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6899042651560767940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6995010357363538242}
+        m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: guest
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7509679851373779380
 GameObject:
   m_ObjectHideFlags: 0

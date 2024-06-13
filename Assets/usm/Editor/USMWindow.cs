@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -93,6 +94,11 @@ namespace USM
 
             GUILayout.EndHorizontal();
             GUILayout.EndScrollView();
+            
+            if(GUILayout.Button("Save", GUILayout.ExpandWidth(true), GUILayout.Height(50)))
+            {
+                SaveCurrentState();
+            }
 
             EndGUI();
         }
@@ -224,6 +230,7 @@ namespace USM
             if (GUILayout.Button("Test", GUILayout.Width(width), GUILayout.Height(40)))
             {
                 _currentUsmBehaviour.Play(state);
+                EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
             }
             GUI.backgroundColor = Color.white;
 
@@ -373,6 +380,21 @@ namespace USM
 
             int stateCount = _currentUsmBehaviour.usm.states.Count;
             _newStateName = GetNewStateName(stateCount);
+        }
+
+        private void SaveCurrentState()
+        {
+            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+            if (prefabStage == null)
+            {
+                // Scene 상태를 저장
+                EditorSceneManager.SaveOpenScenes();
+                return;
+            }
+
+            // To save a prefab without a prompt. 
+            MethodInfo savePrefabMethod = typeof(PrefabStage).GetMethod("Save", BindingFlags.NonPublic | BindingFlags.Instance);
+            savePrefabMethod.Invoke(prefabStage, null);
         }
         #endregion
 
