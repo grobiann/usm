@@ -2,9 +2,15 @@
 Ui State Machine
 
 ## Table of Contents
+- [Introduction](#introduction)
 - [License](https://github.com/grobiann/usm?tab=readme-ov-file#License)
 - [UPM Package](https://github.com/grobiann/usm?tab=readme-ov-file#UPM-Package)
   - [Install via git URL](https://github.com/grobiann/usm?tab=readme-ov-file#Install-via-git-url)
+
+## Introduction
+The UI State Machine is designed to help developers manage complex UI states with ease. It provides a clear structure for defining and transitioning between various UI states, making your code more organized and maintainable.
+![Example Image](./images/upm_screenshot_1.png)
+![Example Image](./images/upm_screenshot_2.png)
 
 ## UPM Package
 ### Install via git URL
