@@ -1,4 +1,4 @@
-[README_EN](https://github.com/grobiann/usm?tab=readme_en-ov-file#License)
+[README_EN](https://github.com/grobiann/usm?tab=readme_en-ov-file)
 
 # usm
 Ui State Machine
