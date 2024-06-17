@@ -4,6 +4,7 @@ Ui State Machine
 ## Table of Contents
 - [License](https://github.com/grobiann/usm?tab=readme-ov-file#License)
 - [UPM Package](https://github.com/grobiann/usm?tab=readme-ov-file#UPM-Package)
+  - [Install via git URL](https://github.com/grobiann/usm?tab=readme-ov-file#Install-via-git-url)
 
 ## UPM Package
 ### Install via git URL
