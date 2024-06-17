@@ -74,7 +74,8 @@ public class Usm_Sample : MonoBehaviour
 
 ## UPM Package
 ### Install via git URL
-Requires a version of unity that supports path query parameter for git packages (Unity >= 2019.3.4f1, Unity >= 2020.1a21). You can add `https://github.com/grobiann/usm.git?path=Assets/usm` to Package Manager
+Requires a version of unity that supports path query parameter for git packages (Unity >= 2019.3.4f1, Unity >= 2020.1a21). 
+You can add `https://github.com/grobiann/usm.git?path=Assets/usm` to Package Manager
 
 ![Example Image](./images/upm_install_guide_1.png)
 ![Example Image](./images/upm_install_guide_2.png)
