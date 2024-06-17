@@ -1,4 +1,4 @@
-[README_EN](https://github.com/grobiann/usm?tab=readme_en-ov-file)
+[README_EN](https://github.com/grobiann/usm/blob/master/README_EN.md)
 
 # usm
 Ui State Machine
