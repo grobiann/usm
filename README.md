@@ -1,34 +1,36 @@
+[README_EN](https://github.com/grobiann/usm?tab=readme_en-ov-file#License)
+
 # usm
 Ui State Machine
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Usage](#usage)
-- [Example](#example)
-- [프리팹과의 관계](#Monobehaviour를 상속받음)
+- [소개](https://github.com/grobiann/usm?tab=readme-ov-file#소개)
+- [사용법](https://github.com/grobiann/usm?tab=readme-ov-file#사용법)
+- [예시](https://github.com/grobiann/usm?tab=readme-ov-file#예시)
+- [MonoBehaviour](https://github.com/grobiann/usm?tab=readme-ov-file#MonoBehaviour)
 - [License](https://github.com/grobiann/usm?tab=readme-ov-file#License)
 - [UPM Package](https://github.com/grobiann/usm?tab=readme-ov-file#UPM-Package)
   - [Install via git URL](https://github.com/grobiann/usm?tab=readme-ov-file#Install-via-git-url)
 
-## Introduction
-The UI State Machine is designed to help developers manage complex UI states with ease. It provides a clear structure for defining and transitioning between various UI states, making your code more organized and maintainable.
+## 소개
+`UI State Machine`은 복잡한 UI 상태를 수비게 관리할 수 있도록 설계되었습니다. 다양한 UI 상태를 정의하고 전환할 수 있는 명확한 구조를 제공하여, 코드를 더 구조화하고 유지보수하기 쉽게 만듭니다.
 
 ![Example Image](./images/upm_screenshot_1.png)
 
-## Usage
-To use the UI State Machine in your project, follow these steps:
+## 사용법
+`UI State Machine`을 프로젝트에서 사용하려면 다음 단계를 따르세요.
 
-1. Import the UI State Machine package into your project.
-2. Add the `UiStateMachineBehaviour` class to your GameObject.
-3. Open the USM Window by clicking the 'Open USM Window' button in the inspector of the `UiStateMachineBehaviour` class.
-4. Create states and set the active state of the gameObjects in the USM Window.
-5. Click the green 'Test' button to easily preview each state.
-6. Change the state of the USM either through scripts or using Unity events.
+1. `UI State Machine` 패키지를 프로젝트에 가져옵니다.
+2. `UiStateMachineBehaviour` 클래스를 GameObject에 추가합니다.
+3. `UiStateMachineBehaviour` 클래스의 인스펙터에서 'Open USM Window' 버튼을 클릭하여 USM 창을 엽니다.
+4. USM 창에서 각 GameObject의 상태를 생성하고 활성 상태를 설정합니다.
+5. 초록색 'Test' 버튼을 클릭하여 각 상태를 쉽게 미리 확인해 볼 수 있습니다.
+6. 스크립트를 통해 또는 Unity 이벤트를 사용하여 USM의 상태를 변경합니다.
 
-## Example
-You can see this example in the `SampleScene` included in the package.
+## 예시
+이 예제는 패키지에 포함된 SampleScene에서 확인할 수 있습니다.
 
-Here's a basic example of how to set up and use the UI State Machine:
+다음은 `UI State Machine`을 사용하는 기본적인 예제입니다.
 
 ```csharp
 public class Usm_Sample : MonoBehaviour
@@ -73,7 +75,7 @@ public class Usm_Sample : MonoBehaviour
 }
 ```
 
-## Monobehaviour를 상속받음
+## MonoBehaviour
 usm의 `UiStateMachineBehaviour`은 `MonoBehaviour`를 상속받았기 때문에, 게임오브젝트 혹은 프리팹과 함께 저장할 수 있습니다.
 따라서 데이터를 복사하거나, 수정하고, 되돌리는데에 용이합니다.
 
