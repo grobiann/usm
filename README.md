@@ -24,7 +24,7 @@ Ui State Machine
 2. `UiStateMachineBehaviour` 클래스를 GameObject에 추가합니다.
 3. `UiStateMachineBehaviour` 클래스의 인스펙터에서 'Open USM Window' 버튼을 클릭하여 USM 창을 엽니다.
 4. USM 창에서 각 GameObject의 상태를 생성하고 활성 상태를 설정합니다.
-5. 초록색 'Test' 버튼을 클릭하여 각 상태를 쉽게 미리 확인해 볼 수 있습니다.
+5. 초록색 'Test' 버튼을 클릭하여 각 상태를 미리 확인해 볼 수 있습니다.
 6. 스크립트를 통해 또는 Unity 이벤트를 사용하여 USM의 상태를 변경합니다.
 
 ## 예시
