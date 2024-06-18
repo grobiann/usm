@@ -28,7 +28,7 @@ Ui State Machine
 6. 스크립트를 통해 또는 Unity 이벤트를 사용하여 USM의 상태를 변경합니다.
 
 ## 예시
-이 예제는 패키지에 포함된 Sample에서 확인할 수 있습니다.
+이 예제는 패키지에 포함된 `USM Sample`에서 확인할 수 있습니다.
 
 ![Example Image](./images/upm_screenshot_3.png)
 
