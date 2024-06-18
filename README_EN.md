@@ -26,7 +26,9 @@ To use the UI State Machine in your project, follow these steps:
 6. Change the state of the USM either through scripts or using Unity events.
 
 ## Example
-You can see this example in the `SampleScene` included in the package.
+You can see this example in the `USM Sample` included in the package.
+
+![Example Image](./images/upm_screenshot_3.png)
 
 Here's a basic example of how to set up and use the `UI State Machine`:
 
