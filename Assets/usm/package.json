@@ -8,7 +8,7 @@
     {
         "displayName": "Sample Scene",
         "description": "This is a sample scene to demonstrate the package.",
-        "path": "Samples~/SampleScene"
+        "path": "Samples~"
     }
 ],
   "dependencies": {}
