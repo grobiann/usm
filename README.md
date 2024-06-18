@@ -13,7 +13,7 @@ Ui State Machine
   - [Install via git URL](https://github.com/grobiann/usm?tab=readme-ov-file#Install-via-git-url)
 
 ## 소개
-`UI State Machine`은 복잡한 UI 상태를 수비게 관리할 수 있도록 설계되었습니다. 다양한 UI 상태를 정의하고 전환할 수 있는 명확한 구조를 제공하여, 코드를 더 구조화하고 유지보수하기 쉽게 만듭니다.
+`UI State Machine`은 복잡한 UI 상태를 쉽게 관리할 수 있도록 설계되었습니다. 다양한 UI 상태를 정의하고 전환할 수 있는 명확한 구조를 제공하여, 코드를 더 구조화하고 유지보수하기 쉽게 만듭니다.
 
 ![Example Image](./images/upm_screenshot_1.png)
 
