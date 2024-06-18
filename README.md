@@ -1,4 +1,4 @@
-[README_EN](https://github.com/grobiann/usm/blob/master/README_EN.md)
+[![README_EN](https://img.shields.io/badge/Usm-English-red)](https://github.com/grobiann/usm/blob/master/README_EN.md)
 
 # usm
 Ui State Machine
@@ -28,7 +28,9 @@ Ui State Machine
 6. 스크립트를 통해 또는 Unity 이벤트를 사용하여 USM의 상태를 변경합니다.
 
 ## 예시
-이 예제는 패키지에 포함된 SampleScene에서 확인할 수 있습니다.
+이 예제는 패키지에 포함된 Sample에서 확인할 수 있습니다.
+
+![Example Image](./images/upm_screenshot_3.png)
 
 다음은 `UI State Machine`을 사용하는 기본적인 예제입니다.
 
