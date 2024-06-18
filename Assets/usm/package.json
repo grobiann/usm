@@ -6,9 +6,9 @@
   "unity": "2022.3",
   "samples": [
     {
-        "displayName": "Sample Scene",
+        "displayName": "USM Sample",
         "description": "This is a sample scene to demonstrate the package.",
-        "path": "Samples~"
+        "path": "Samples"
     }
 ],
   "dependencies": {}
