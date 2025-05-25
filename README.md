@@ -35,43 +35,47 @@ Ui State Machine
 다음은 `UI State Machine`을 사용하는 기본적인 예제입니다.
 
 ```csharp
-public class Usm_Sample : MonoBehaviour
+public class UsmSampleSettingWindow : MonoBehaviour
 {
-    public UiStateMachineBehaviour usm_tab;
-    public UiStateMachineBehaviour usm_graphic;
+    public UiStateMachineBehaviour _usmTab;
+    public UiStateMachineBehaviour _usmGraphicTabContent;
 
-    private int _indexGraphics = 0;
+    private int _graphicTabContentIndex = 0;
+
+    private const string TAB_USM_NAME_GRAPHICS = "Graphics";
 
     private void Awake()
     {
-        SelectTab("Graphics");
+        SelectTab(TAB_USM_NAME_GRAPHICS);
     }
 
     public void SelectTab(string tabName)
     {
-        usm_tab.Play(tabName);
+        _usmTab.SetState(tabName);
 
         StopAllCoroutines();
-        if (tabName == "Graphics")
+        if (tabName == TAB_USM_NAME_GRAPHICS)
         {
-            StartCoroutine(ChangeGraphics_Periodically());
+            StartCoroutine(ChangeGraphicContentsPeriodically());
         }
     }
 
-    IEnumerator ChangeGraphics_Periodically()
+    private IEnumerator ChangeGraphicContentsPeriodically()
     {
-        var graphicStates = usm_graphic.usm.states;
+        var graphicStates = _usmGraphicTabContent.Usm.States;
         Debug.Assert(graphicStates.Count > 0);
 
+        float contentChangeInterval = 2.0f;
         while (true)
         {
-            var state = graphicStates[_indexGraphics];
-            usm_graphic.Play(state);
-            yield return new WaitForSeconds(2.0f);
+            var state = graphicStates[_graphicTabContentIndex];
+            _usmGraphicTabContent.SetState(state);
 
-            _indexGraphics += 1;
-            if (_indexGraphics >= graphicStates.Count)
-                _indexGraphics = 0;
+            yield return new WaitForSeconds(contentChangeInterval);
+
+            _graphicTabContentIndex += 1;
+            if (_graphicTabContentIndex >= graphicStates.Count)
+                _graphicTabContentIndex = 0;
         }
     }
 }
