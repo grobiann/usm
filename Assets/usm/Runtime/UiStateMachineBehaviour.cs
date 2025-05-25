@@ -4,31 +4,34 @@ namespace USM
 {
     public class UiStateMachineBehaviour : MonoBehaviour
     {
-        public UiState CurrentState { get; protected set; }
-        public string CurrentStateName => CurrentState == null ? string.Empty : CurrentState.StateName;
+        public UsmState CurrentState { get; protected set; }
+        public string CurrentStateName => CurrentState != null ? CurrentState.StateName : string.Empty;
+        public UiStateMachine Usm => _usm;
 
-        public UiStateMachine usm;
+        [SerializeField] private UiStateMachine _usm;
 
-        public void Play(string stateName)
+        public void SetState(string stateName)
         {
-            var state = usm.states.Find(x => x.StateName == stateName);
-            if (state == null)
+            for (int i = 0; i < _usm.States.Count; i++)
             {
-                Debug.LogWarning($"There does not exist a state with name: '{stateName}'");
-                return;
+                if (_usm.States[i].StateName == stateName)
+                {
+                    SetState(_usm.States[i]);
+                    return;
+                }
             }
 
-            Play(state);
+            Debug.LogWarning($"There does not exist a state with name: '{stateName}'");
         }
 
-        public void Play(UiState state)
+        public void SetState(UsmState state)
         {
             CurrentState = state;
 
-            foreach (var go in usm.activeTargets)
+            foreach (GameObject go in _usm.ActiveTargets)
             {
                 bool active = state.IsActive(go);
-                go.gameObject.SetActive(active);
+                go.SetActive(active);
             }
         }
     }

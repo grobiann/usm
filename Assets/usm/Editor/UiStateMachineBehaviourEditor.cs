@@ -12,10 +12,10 @@ namespace USM
 
             UiStateMachineBehaviour usm = (UiStateMachineBehaviour)target;
 
-            if(GUILayout.Button("Open USM Window"))
+            if (GUILayout.Button("Open USM Window"))
             {
                 var window = USMWindow.ShowWindow();
-                if(window.CurrentUsmBehaviour != usm)
+                if (window.CurrentUsmBehaviour != usm)
                 {
                     window.SelectUsmBehaviour(usm);
                 }

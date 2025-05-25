@@ -176,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6227388791039858549
 RectTransform:
   m_ObjectHideFlags: 0
@@ -192,9 +192,9 @@ RectTransform:
   - {fileID: 2155427266816807248}
   m_Father: {fileID: 5472222512236289308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 167.312, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6133090014876902105
@@ -279,16 +279,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6995010357363538242}
+      - m_Target: {fileID: 8824623295869795159}
         m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
-        m_MethodName: Play
+        m_MethodName: SetState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: guest
+          m_StringArgument: NeedLogin
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2560452472936439326
@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2036877401580746403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4003033315121630714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -649,16 +649,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6995010357363538242}
+      - m_Target: {fileID: 8824623295869795159}
         m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
-        m_MethodName: Play
+        m_MethodName: SetState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: apple
+          m_StringArgument: Apple
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4472191805979921538
@@ -758,7 +758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7836489058961794932
 RectTransform:
   m_ObjectHideFlags: 0
@@ -861,16 +861,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6995010357363538242}
+      - m_Target: {fileID: 8824623295869795159}
         m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
-        m_MethodName: Play
+        m_MethodName: SetState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: google
+          m_StringArgument: Google
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7032564924545266206
@@ -891,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5772770256639386995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -907,9 +907,9 @@ RectTransform:
   - {fileID: 5410343155099594069}
   m_Father: {fileID: 5472222512236289308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 167.312, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2366238768075830041
@@ -994,16 +994,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6995010357363538242}
+      - m_Target: {fileID: 8824623295869795159}
         m_TargetAssemblyTypeName: USM.UiStateMachineBehaviour, usm
-        m_MethodName: Play
+        m_MethodName: SetState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: guest
+          m_StringArgument: NeedLogin
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7509679851373779380
@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 2911171531613952328}
   - component: {fileID: 5993107386199280049}
   - component: {fileID: 6436667222373516035}
-  - component: {fileID: 6995010357363538242}
+  - component: {fileID: 8824623295869795159}
   m_Layer: 0
   m_Name: Sample_innerPrefab
   m_TagString: Untagged
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6995010357363538242
+--- !u!114 &8824623295869795159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1243,38 +1243,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff481cebc1d3c54481dedaca8821533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usm:
-    states:
-    - _stateName: guest
-      GoActivations:
-      - GameObject: {fileID: 4472191805979921538}
-        IsActive: 1
-      - GameObject: {fileID: 778778396516589220}
-        IsActive: 0
+  _usm:
+    _states:
+    - _stateName: NeedLogin
+      _goActivations:
       - GameObject: {fileID: 5234186552788018913}
         IsActive: 1
       - GameObject: {fileID: 3950368796209896205}
         IsActive: 1
-    - _stateName: google
-      GoActivations:
+    - _stateName: Google
+      _goActivations:
       - GameObject: {fileID: 7032564924545266206}
-        IsActive: 1
-      - GameObject: {fileID: 4472191805979921538}
         IsActive: 1
       - GameObject: {fileID: 778778396516589220}
         IsActive: 1
-    - _stateName: apple
-      GoActivations:
-      - GameObject: {fileID: 7032564924545266206}
-        IsActive: 1
+    - _stateName: Apple
+      _goActivations:
       - GameObject: {fileID: 1299549979853588274}
         IsActive: 1
-      - GameObject: {fileID: 4472191805979921538}
+      - GameObject: {fileID: 7032564924545266206}
         IsActive: 1
       - GameObject: {fileID: 2560452472936439326}
         IsActive: 1
-    activeTargets:
-    - {fileID: 4472191805979921538}
+    _activeTargets:
     - {fileID: 778778396516589220}
     - {fileID: 2560452472936439326}
     - {fileID: 5234186552788018913}

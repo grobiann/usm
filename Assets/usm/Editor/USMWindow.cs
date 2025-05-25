@@ -64,7 +64,7 @@ namespace USM
             StartGUI();
 
             // Create StateMachineGroupName field
-            DisplayStateMachineGUI();
+            DrawStateMachineGUI();
 
             if (_currentUsmBehaviour == null)
             {
@@ -72,30 +72,31 @@ namespace USM
                 return;
             }
 
-            // Begin scroll view
-            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, GUILayout.ExpandHeight(true));
-
-            GUILayout.BeginHorizontal(GUILayout.MaxWidth(100));
-
-            // Left side content
-            DisplayUsmChildrenListGUI();
-
-            // Draw Vertical Line
-            GUILayout.Box(GUIContent.none, GUILayout.Width(2), GUILayout.ExpandHeight(true));
-
-            // Right side content
-            var states = _currentUsmBehaviour.usm.states;
-            for (int i = 0; i < states.Count; i++)
+            // Draw scroll area
             {
-                var state = states[i];
-                DisplayStateGUI(state);
-            }
-            DisplayStateCreateGUI();
+                _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, GUILayout.ExpandHeight(true));
+                GUILayout.BeginHorizontal(GUILayout.MaxWidth(100));
 
-            GUILayout.EndHorizontal();
-            GUILayout.EndScrollView();
-            
-            if(GUILayout.Button("Save", GUILayout.ExpandWidth(true), GUILayout.Height(50)))
+                // Left side content
+                DrawUsmChildrenListGUI();
+
+                // Draw vertical line
+                GUILayout.Box(GUIContent.none, GUILayout.Width(2), GUILayout.ExpandHeight(true));
+
+                // Right side content
+                var states = _currentUsmBehaviour.Usm.States;
+                for (int i = 0; i < states.Count; i++)
+                {
+                    var state = states[i];
+                    DrawStateGUI(state);
+                }
+                DrawStateCreateGUI();
+
+                GUILayout.EndHorizontal();
+                GUILayout.EndScrollView();
+            }
+
+            if (GUILayout.Button("Save", GUILayout.ExpandWidth(true), GUILayout.Height(50)))
             {
                 SaveCurrentState();
             }
@@ -103,7 +104,7 @@ namespace USM
             EndGUI();
         }
 
-        #region GUI Display
+        #region GUI Draw
         private void StartGUI()
         {
             GUILayout.BeginHorizontal();
@@ -117,7 +118,7 @@ namespace USM
             GUILayout.EndHorizontal();
         }
 
-        private void DisplayStateMachineGUI()
+        private void DrawStateMachineGUI()
         {
             GUILayout.Space(10);
             GUILayout.Label("StateMachine", GUILayout.Width(100));
@@ -142,7 +143,7 @@ namespace USM
             GUILayout.Space(10);
         }
 
-        private void DisplayUsmChildrenListGUI()
+        private void DrawUsmChildrenListGUI()
         {
             float width = 310;
             Debug.Assert(_currentUsmBehaviour != null);
@@ -196,7 +197,7 @@ namespace USM
                     }
                 }
 
-                bool contain = _currentUsmBehaviour.usm.activeTargets.Contains(item.gameObject);
+                bool contain = _currentUsmBehaviour.Usm.ActiveTargets.Contains(item.gameObject);
                 var btnText = contain ? "Use" : "Not Use";
                 var bgColor = contain ? Color.white : Color.gray;
                 GUI.backgroundColor = bgColor;
@@ -209,7 +210,7 @@ namespace USM
                     }
                     else
                     {
-                        ChangeGameObjectUsability(_currentUsmBehaviour.usm, item.gameObject, !contain);
+                        ChangeGameObjectUsability(_currentUsmBehaviour.Usm, item.gameObject, !contain);
                     }
                 }
                 GUI.backgroundColor = Color.white;
@@ -219,7 +220,7 @@ namespace USM
             GUILayout.EndVertical();
         }
 
-        private void DisplayStateGUI(UiState state)
+        private void DrawStateGUI(UsmState state)
         {
             Debug.Assert(_currentUsmBehaviour != null);
             Debug.Assert(state != null);
@@ -229,7 +230,7 @@ namespace USM
             GUI.backgroundColor = new Color(0.5f, 1.0f, 0.5f);
             if (GUILayout.Button("Test", GUILayout.Width(width), GUILayout.Height(40)))
             {
-                _currentUsmBehaviour.Play(state);
+                _currentUsmBehaviour.SetState(state);
                 EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
             }
             GUI.backgroundColor = Color.white;
@@ -254,7 +255,7 @@ namespace USM
             foreach (var item in _currentUsmChildrenFiltered)
             {
                 var go = item.gameObject;
-                bool use = _currentUsmBehaviour.usm.activeTargets.Contains(go);
+                bool use = _currentUsmBehaviour.Usm.ActiveTargets.Contains(go);
                 if (use)
                 {
                     var active = state.IsActive(go);
@@ -296,7 +297,7 @@ namespace USM
             GUILayout.EndVertical();
         }
 
-        private void DisplayStateCreateGUI()
+        private void DrawStateCreateGUI()
         {
             Debug.Assert(_currentUsmBehaviour != null);
 
@@ -337,13 +338,13 @@ namespace USM
             EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
         }
 
-        private void ChangeGameObjectActivation(UiState state, GameObject go, bool active)
+        private void ChangeGameObjectActivation(UsmState state, GameObject go, bool active)
         {
             state.SetActive(go, !active);
             EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
         }
 
-        private void ChangeStateName(UiState state, string name)
+        private void ChangeStateName(UsmState state, string name)
         {
             state.StateName = name;
             EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
@@ -357,28 +358,33 @@ namespace USM
 
         private bool CreateNewState(string name)
         {
-            if (_currentUsmBehaviour.usm.states.Exists(x => x.StateName == name))
-                return false;
+            foreach (var state in _currentUsmBehaviour.Usm.States)
+            {
+                if (state.StateName == name)
+                {
+                    return false;
+                }
+            }
 
-            var newState = new UiState();
+            var newState = new UsmState();
             newState.StateName = name;
 
-            _currentUsmBehaviour.usm.AddState(newState);
+            _currentUsmBehaviour.Usm.AddState(newState);
             EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
 
-            int stateCount = _currentUsmBehaviour.usm.states.Count;
+            int stateCount = _currentUsmBehaviour.Usm.States.Count;
             _newStateName = GetNewStateName(stateCount);
             return true;
         }
 
-        private void DeleteState(UiState state)
+        private void DeleteState(UsmState state)
         {
             Undo.RecordObject(_currentUsmBehaviour, "Delete State");
-            _currentUsmBehaviour.usm.RemoveState(state);
+            _currentUsmBehaviour.Usm.RemoveState(state);
 
             EditorUtility.SetDirty(_currentUsmBehaviour.gameObject);
 
-            int stateCount = _currentUsmBehaviour.usm.states.Count;
+            int stateCount = _currentUsmBehaviour.Usm.States.Count;
             _newStateName = GetNewStateName(stateCount);
         }
 
@@ -420,7 +426,7 @@ namespace USM
                 // Find all instances of UiStateMachine in the current scene
                 _usmBehavioursInScene = FindObjectsOfType<UiStateMachineBehaviour>(true).Reverse().ToArray();
             }
-            
+
             _currentUsmBehaviour = null;
             _currentUsmChildrenFiltered = null;
             if (_usmBehavioursInScene.Length > 0)
@@ -432,7 +438,7 @@ namespace USM
         public void SelectUsmBehaviour(UiStateMachineBehaviour usmBehaviour)
         {
             Debug.Assert(usmBehaviour != null);
-            if (usmBehaviour.usm == null)
+            if (usmBehaviour.Usm == null)
             {
                 Debug.LogWarning("There is no usm in behaviour");
                 return;
@@ -444,7 +450,7 @@ namespace USM
 
             RefreshUsmChildren();
 
-            int stateCount = _currentUsmBehaviour.usm.states.Count;
+            int stateCount = _currentUsmBehaviour.Usm.States.Count;
             _newStateName = GetNewStateName(stateCount);
         }
 
@@ -471,13 +477,13 @@ namespace USM
 
                 _currentUsmChildrenFiltered = _currentUsmChildren
                     .Where(child => child.gameObject.name.ToLower().Contains(loweredFilter))
-                    .OrderByDescending(item => _currentUsmBehaviour.usm.activeTargets.Contains(item.gameObject))
+                    .OrderByDescending(item => _currentUsmBehaviour.Usm.ActiveTargets.Contains(item.gameObject))
                     .ToArray();
             }
             else
             {
                 _currentUsmChildrenFiltered = _currentUsmChildren
-                    .OrderByDescending(item => _currentUsmBehaviour.usm.activeTargets.Contains(item.gameObject))
+                    .OrderByDescending(item => _currentUsmBehaviour.Usm.ActiveTargets.Contains(item.gameObject))
                     .ToArray();
             }
         }
@@ -522,14 +528,7 @@ namespace USM
             Debug.Assert(_currentUsmBehaviour != null);
 
             // usm내에 오브젝트 데이터가 올바른지 확인
-            var cnt = _currentUsmBehaviour.usm.activeTargets.RemoveAll(go => go == null);
-            foreach (var state in _currentUsmBehaviour.usm.states)
-            {
-                cnt += state.GoActivations.RemoveAll(go => go == null);
-            }
-
-            bool changed = cnt > 0;
-            if (changed)
+            if (_currentUsmBehaviour.Usm.RemoveInvalidLinks())
             {
                 RefreshUsmChildren();
             }
