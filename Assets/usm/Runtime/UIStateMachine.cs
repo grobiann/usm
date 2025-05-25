@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace USM
+namespace Usm
 {
     [System.Serializable]
-    public class UiStateMachine
+    public class UIStateMachine
     {
         public IReadOnlyList<UsmState> States => _states;
         public IReadOnlyList<GameObject> ActiveTargets => _activeTargets;

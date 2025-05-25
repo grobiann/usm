@@ -6,14 +6,14 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace USM
+namespace Usm.Editor
 {
-    public class USMWindow : EditorWindow
+    public class UsmWindow : EditorWindow
     {
-        public UiStateMachineBehaviour CurrentUsmBehaviour => _currentUsmBehaviour;
+        public UIStateMachineBehaviour CurrentUsmBehaviour => _currentUsmBehaviour;
 
-        private UiStateMachineBehaviour[] _usmBehavioursInScene = new UiStateMachineBehaviour[0];
-        private UiStateMachineBehaviour _currentUsmBehaviour;
+        private UIStateMachineBehaviour[] _usmBehavioursInScene = new UIStateMachineBehaviour[0];
+        private UIStateMachineBehaviour _currentUsmBehaviour;
         private Transform[] _currentUsmChildren;
         private Transform[] _currentUsmChildrenFiltered;
 
@@ -26,9 +26,9 @@ namespace USM
         private const int STATE_OBJECT_ITEM_HEIGHT = 25;
 
         [MenuItem("Window/Tools/USM Window")]
-        public static USMWindow ShowWindow()
+        public static UsmWindow ShowWindow()
         {
-            return GetWindow<USMWindow>("USM Window");
+            return GetWindow<UsmWindow>("USM Window");
         }
 
         private void OnEnable()
@@ -327,7 +327,7 @@ namespace USM
         #endregion
 
         #region GUI Input Controller
-        private void ChangeGameObjectUsability(UiStateMachine usm, GameObject go, bool usable)
+        private void ChangeGameObjectUsability(UIStateMachine usm, GameObject go, bool usable)
         {
             if (usable)
                 usm.AddTarget(go);
@@ -410,21 +410,21 @@ namespace USM
             if (prefabStage != null)
             {
                 var root = prefabStage.prefabContentsRoot;
-                var usm = root.GetComponent<UiStateMachineBehaviour>();
+                var usm = root.GetComponent<UIStateMachineBehaviour>();
                 if (usm == null)
                 {
-                    _usmBehavioursInScene = new UiStateMachineBehaviour[0];
+                    _usmBehavioursInScene = new UIStateMachineBehaviour[0];
                 }
                 else
                 {
                     // Find all instances of UiStateMachine in prefab stage
-                    _usmBehavioursInScene = usm.gameObject.GetComponentsInChildren<UiStateMachineBehaviour>(true);
+                    _usmBehavioursInScene = usm.gameObject.GetComponentsInChildren<UIStateMachineBehaviour>(true);
                 }
             }
             else
             {
                 // Find all instances of UiStateMachine in the current scene
-                _usmBehavioursInScene = FindObjectsOfType<UiStateMachineBehaviour>(true).Reverse().ToArray();
+                _usmBehavioursInScene = FindObjectsOfType<UIStateMachineBehaviour>(true).Reverse().ToArray();
             }
 
             _currentUsmBehaviour = null;
@@ -435,7 +435,7 @@ namespace USM
             }
         }
 
-        public void SelectUsmBehaviour(UiStateMachineBehaviour usmBehaviour)
+        public void SelectUsmBehaviour(UIStateMachineBehaviour usmBehaviour)
         {
             Debug.Assert(usmBehaviour != null);
             if (usmBehaviour.Usm == null)

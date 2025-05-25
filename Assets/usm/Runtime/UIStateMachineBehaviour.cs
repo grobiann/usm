@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-namespace USM
+namespace Usm
 {
-    public class UiStateMachineBehaviour : MonoBehaviour
+    public class UIStateMachineBehaviour : MonoBehaviour
     {
         public UsmState CurrentState { get; protected set; }
         public string CurrentStateName => CurrentState != null ? CurrentState.StateName : string.Empty;
-        public UiStateMachine Usm => _usm;
+        public UIStateMachine Usm => _usm;
 
-        [SerializeField] private UiStateMachine _usm;
+        [SerializeField] private UIStateMachine _usm;
 
         public void SetState(string stateName)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace USM
+namespace Usm
 {
     [System.Serializable]
     public struct GameObjectActivation

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace USM.Sample
+namespace Usm.Sample
 {
     public class UsmSampleSettingWindow : MonoBehaviour
     {
-        public UiStateMachineBehaviour _usmTab;
-        public UiStateMachineBehaviour _usmGraphicTabContent;
+        public UIStateMachineBehaviour _usmTab;
+        public UIStateMachineBehaviour _usmGraphicTabContent;
 
         private int _graphicTabContentIndex = 0;
 

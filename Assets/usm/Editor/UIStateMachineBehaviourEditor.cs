@@ -1,20 +1,20 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace USM
+namespace Usm.Editor
 {
-    [CustomEditor(typeof(UiStateMachineBehaviour))]
-    public class UiStateMachineBehaviourEditor : Editor
+    [CustomEditor(typeof(UIStateMachineBehaviour))]
+    public class UIStateMachineBehaviourEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            UiStateMachineBehaviour usm = (UiStateMachineBehaviour)target;
+            UIStateMachineBehaviour usm = (UIStateMachineBehaviour)target;
 
             if (GUILayout.Button("Open USM Window"))
             {
-                var window = USMWindow.ShowWindow();
+                var window = UsmWindow.ShowWindow();
                 if (window.CurrentUsmBehaviour != usm)
                 {
                     window.SelectUsmBehaviour(usm);
