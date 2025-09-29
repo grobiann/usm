@@ -10,6 +10,11 @@ namespace Usm
 
         [SerializeField] private UIStateMachine _usm;
 
+        private void Start()
+        {
+            _usm.RemoveInvalidLinks();
+        }
+
         public void SetState(string stateName)
         {
             for (int i = 0; i < _usm.States.Count; i++)
